@@ -2,8 +2,10 @@ import { FaGoogle } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { FaDiscord } from "react-icons/fa";
 import { ButtonLogin } from "../buttons/ButtonLogin";
+import {useAuthStore} from "../../store/AuthStore";
 
 export function LoginTemplate() {
+  const {signInWithGoogle} = useAuthStore();
   return (
     <div className="containerLogin mx-auto min-h-screen flex items-center justify-center">
       <div className="flex flex-col items-center justify-center text-center py-12 px-6 sm:px-12 bg-gray-900 rounded-lg">
@@ -20,6 +22,7 @@ export function LoginTemplate() {
           icono={<FaGoogle />}
           titulo="Iniciar sesión con Google"
           clase="bg-red-500 text-white hover:bg-red-700 px-6 py-3 rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 mb-4"
+          funcion={signInWithGoogle}
         />
         <ButtonLogin
           icono={<FaGithub />}
