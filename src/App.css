@@ -22,6 +22,70 @@
   animation: rotate 7s linear both infinite;
 }
 
+.logoSidebar {
+  background-image: url(assets/img/logo.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 50px;
+  height: 50px;
+  margin-bottom: 5px;
+  animation: rotate 7s linear both infinite;
+}
+
+
+
+.active-item-sidebar {
+  @apply bg-gradient-to-r from-blue-950 to-blue-600 
+         text-white 
+         rounded-lg shadow-md 
+         transition-all duration-300 
+         hover:brightness-110;
+}
+
+.espacio{
+  margin-bottom: 20px;
+}
+
+.container{
+  display: grid;
+  grid-template-columns: 1fr;
+  transition: all 0.2s ease-in-out;
+  height: 100vh;
+  width: 100vw;
+
+  .ContentSidebar {
+    display: none;
+  }
+  .ContentMenuambur {
+    display: block;
+    position: absolute;
+    left: 20px;
+  }
+  @media (min-width: 768px) {
+    grid-template-columns: 65px 1fr;
+    &.active {
+      grid-template-columns: 220px 1fr;
+    }
+    .ContentSidebar {
+      display: initial;
+    }
+    .ContentMenuambur {
+      display: none;
+    }
+  }
+}
+
+.containerRoutesBody{
+  grid-column: 1;
+  width: 100%;
+  margin-left: 16px;
+  @media (min-width: 768px) {
+    grid-column: 2;
+  }
+}
+
+
 @keyframes rotate {
   0% {
     transform: rotateZ(0);

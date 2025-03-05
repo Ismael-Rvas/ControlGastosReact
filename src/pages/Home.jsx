@@ -5,9 +5,7 @@ function Home() {
     const { user } = UserAuth();
     return (  
         <>
-            <h1>Bienvenido {user.name}</h1>
-            <img src={user.picture} alt="" />
-            <button onClick={signout}>Logout</button>
+        <h1>Home</h1>
         </>
     );
 }
