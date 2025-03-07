@@ -1,6 +1,6 @@
 import { useAuthStore } from "../store/AuthStore";
 import { UserAuth } from "../context/AuthContent";
-function Home() {
+export function Home() {
     const { signout } = useAuthStore();
     const { user } = UserAuth();
     return (  
@@ -10,4 +10,4 @@ function Home() {
     );
 }
 
-export default Home;
+

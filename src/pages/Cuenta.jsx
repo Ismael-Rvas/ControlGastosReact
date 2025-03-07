@@ -1,4 +1,4 @@
-function Cuenta() {
+export function Cuenta() {
     return (  
         <>
         <h1>Cuenta</h1>
@@ -6,4 +6,4 @@ function Cuenta() {
     );
 }
 
-export default Cuenta;
+

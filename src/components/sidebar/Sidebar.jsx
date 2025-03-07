@@ -30,8 +30,8 @@ export function Sidebar() {
            EcoControl
         </p>
           <NavItem icon={<FaHome />} text="Home" to="/" isOpen={isOpen} />
-          <NavItem icon={<FaUser />} text="Cuenta" to="/cuenta" isOpen={isOpen} />
           <NavItem icon={<FaCog />} text="Configuración" to="/configuracion" isOpen={isOpen} />
+          <NavItem icon={<FaUser />} text="Cuenta" to="/cuenta" isOpen={isOpen} />
           <NavItem icon={<TbLogout2 />} onClick={signout} text="Logout" isOpen={isOpen} />
         </nav>
       </div>
