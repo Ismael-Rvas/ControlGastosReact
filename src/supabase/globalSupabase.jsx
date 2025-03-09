@@ -1,4 +1,4 @@
-import { supabase } from "./supabase.config";
+import { supabase } from "../index";
 
 export const ObtenerIdAuthSupabase = async () => {
     const {

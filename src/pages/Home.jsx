@@ -1,13 +1,4 @@
-import { useAuthStore } from "../store/AuthStore";
-import { UserAuth } from "../context/AuthContent";
+import { HomeTemplate} from "../index";
 export function Home() {
-    const { signout } = useAuthStore();
-    const { user } = UserAuth();
-    return (  
-        <>
-        <h1>Home</h1>
-        </>
-    );
+  return <HomeTemplate/>;
 }
-
-

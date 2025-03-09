@@ -1,4 +1,4 @@
-import { ConfiguracionTemplate } from "../components/templates/ConfiguracionTemplate";
+import { ConfiguracionTemplate } from "../index";
 
 export function Configuracion() {
     return (  

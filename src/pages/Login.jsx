@@ -1,10 +1,5 @@
-import { LoginTemplate } from "../components/templates/LoginTemplate";
+import { LoginTemplate } from "../index";
 
 export function Login() {
-    return (  
-        <>
-            <LoginTemplate/>
-        </>
-    );
+  return <LoginTemplate />;
 }
-

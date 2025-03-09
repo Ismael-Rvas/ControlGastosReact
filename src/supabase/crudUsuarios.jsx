@@ -1,11 +1,9 @@
-import { ObtenerIdAuthSupabase } from "../supabase/globalSupabase";
-import { supabase } from "./supabase.config";
+import { supabase, ObtenerIdAuthSupabase } from "../index";
 import Swal from "sweetalert2";
 
 export const InsertarUsuarios = async (p) => {
   try {
     const { data } = await supabase.from("usuarios").insert(p).select();
-    console.log(p);
     return data;
   } catch (error) {}
 };

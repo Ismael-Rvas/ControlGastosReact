@@ -76,24 +76,14 @@ export const LinksArray = [
     label: "Informes",
     icon: <MdOutlineAnalytics />,
     to: "/informes",
-  },
-  // {
-  //   label: "Dashboard",
-  //   icon: <RiDashboard3Line />,
-  //   to: "/dashboard",
-  // },
+  }
 ];
 export const SecondarylinksArray = [
   {
     label: "Configuración",
     icon: <AiOutlineSetting />,
     to: "/configurar",
-  },
-  {
-    label: "Acerca de",
-    icon: <TbPig />,
-    to: "/acercade",
-  },
+  }
 ];
 //temas
 export const TemasData = [

@@ -1,3 +1,15 @@
+import styled from "styled-components";
+import {
+  Header,
+  Selector,
+  v,
+  ListaPaises,
+  useUsuariosStore,
+  ListaGenerica,
+  TemasData,
+  Btnsave,CardEliminarData
+  
+} from "../../index";
 import { useState } from "react";
 
 export function ConfiguracionTemplate() {
@@ -29,7 +41,7 @@ export function ConfiguracionTemplate() {
     await editartemamonedauser(p);
   };
   return (
-    <div className="min-h-screen p-4 w-full" style={{ background: theme.bgtotal, color: theme.text, display: 'grid', gridTemplate: '"header" 100px "area2" auto' }}>
+    <Container>
     
       <header className="header">
         <Header
@@ -39,7 +51,7 @@ export function ConfiguracionTemplate() {
 
       <section className="area2">
         <h1>AJUSTES</h1>
-        <div className="card">
+        <ContentCard>
           <span>Moneda:</span>
           <Selector
             state={stateListaPaises}
@@ -53,8 +65,8 @@ export function ConfiguracionTemplate() {
               setState={() => setStateListaPaises(!stateListaPaises)}
             />
           )}
-        </div>
-        <div className="card">
+        </ContentCard>
+        <ContentCard>
           <span>Tema:</span>
           <Selector
             texto1={temaSeleccionado}
@@ -69,7 +81,7 @@ export function ConfiguracionTemplate() {
               funcion={setSelecttema}
             />
           )}
-        </div>
+        </ContentCard>
         <Btnsave
           titulo="Guardar"
           bgcolor={v.colorselector}
@@ -78,6 +90,47 @@ export function ConfiguracionTemplate() {
         />
         <CardEliminarData/>
       </section>
-    </div>
+    </Container>
   );
 }
+const Container = styled.div`
+  min-height: 100vh;
+  padding: 15px;
+  width: 100%;
+  background: ${({ theme }) => theme.bgtotal};
+  color: ${({ theme }) => theme.text};
+  display: grid;
+  grid-template:
+    "header" 100px
+    "area2" auto;
+
+  .header {
+    grid-area: header;
+    /* background-color: rgba(103, 93, 241, 0.14); */
+    display: flex;
+    align-items: center;
+  }
+
+  .area2 {
+    grid-area: area2;
+    /* background-color: rgba(77, 237, 106, 0.14); */
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: start;
+    gap: 30px;
+   
+    h1 {
+      font-size: 3rem;
+    }
+  }
+`;
+const ContentCard = styled.div`
+  display: flex;
+  text-align: start;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  width: 100%;
+  justify-content: center;
+`;
