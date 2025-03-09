@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { CalendarioLineal, Header, Tabs,ContentFiltros ,Btndesplegable,ListaMenuDesplegable,DataDesplegableMovimientos,useOperaciones,Btnfiltro,v} from "../../index";
+import { CalendarioLineal, Header, Tabs,ContentFiltros ,Btndesplegable,ListaMenuDesplegable,DataDesplegableMovimientos,useOperaciones,} from "../../index";
 import { useState } from "react";
 import dayjs from "dayjs";
 export function InformesTemplate() {

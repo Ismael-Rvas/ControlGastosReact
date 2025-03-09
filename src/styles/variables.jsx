@@ -12,7 +12,12 @@ import { TbBrandSupabase } from "react-icons/tb";
 import { FaReact } from "react-icons/fa";
 import { BsArrowDown, BsArrowUpShort } from "react-icons/bs";
 import { FaBalanceScale } from "react-icons/fa";
+import { FaGoogle } from "react-icons/fa";
+import { FaDiscord } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
 import logo from "../assets/img/logo.png";
+import billetera from "../assets/img/billetera.webp";
+import reportes from "../assets/img/reportes.webp";
 import { BsGoogle } from "react-icons/bs";
 import { RiCloseLine } from "react-icons/ri";
 import { BiSave } from "react-icons/bi";
@@ -66,7 +71,12 @@ export const v = {
   flechaabajolarga: BsArrowDown,
   flechaarribalarga: BsArrowUpShort,
   balance: FaBalanceScale,
+  google: FaGoogle,
+  discord: FaDiscord,
+  github: FaGithub,
   logo: logo,
+  billetera: billetera,
+  reportes: reportes,
   iconogoogle: BsGoogle,
   iconocerrar: RiCloseLine,
   iconoguardar: BiSave,

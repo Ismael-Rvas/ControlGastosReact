@@ -109,7 +109,11 @@ export function Tabs() {
     </Container>
   );
 }
-const Container = styled.div`
+
+const Container = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== 'activeTab',
+})`
+
   position: relative;
   display: flex;
   align-items: center;

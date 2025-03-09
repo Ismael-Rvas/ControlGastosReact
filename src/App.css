@@ -1,20 +1,5 @@
 @import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-.logo {
-  background-image: url(assets/img/logo.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  width: 100px;
-  height: 100px;
-  margin-bottom: 5px;
-  animation: rotate 7s linear both infinite;
-}
-
 .logoSidebar {
   background-image: url(assets/img/logo.png);
   background-repeat: no-repeat;

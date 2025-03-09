@@ -1,78 +1,87 @@
-import styled from "styled-components";
-import { Btnsave, v,useAuthStore } from "../../index";
+import { v, useAuthStore } from "../../index";
+import "./loginRegister.css";
+import { useState } from "react";
+import { SocialIcon } from "../moleculas/BtnSocial";
+
 export function LoginTemplate() {
-  const {signInWithGoogle} = useAuthStore();
-  
+  const { signInWithGoogle } = useAuthStore();
+  const [signUpMode, setSignUpMode] = useState(false);
+
+  const handleSignUp = () => setSignUpMode(true);
+  const handleSignIn = () => setSignUpMode(false);
+
   return (
-    <Container imgfondo={v.imagenfondo}>
-      <div className="contentCard">
-        <div className="contentImg">
-          <img src={v.logo}/>
+    <div className={`containerlogin ${signUpMode ? "sign-up-mode" : ""}`}>
+      <div className="forms-container">
+        <div className="signin-signup">
+          <form className="sign-in-form">
+            <h2 className="title">Iniciar sesión</h2>
+            <div className="input-field">
+              <i className="fas fa-user"></i>
+              <input type="text" placeholder="Nombre de usuario" />
+            </div>
+            <div className="input-field">
+              <i className="fas fa-lock"></i>
+              <input type="password" placeholder="Contraseña" />
+            </div>
+            <input type="submit" value="Login" className="btn solid" />
+            <p className="social-text">O inicia sección con</p>
+            <div className="social-media">
+              <SocialIcon icono={v.google} funcion={signInWithGoogle}/>
+              <SocialIcon icono={v.discord} />
+              <SocialIcon icono={v.github} />
+            </div>
+          </form>
+          <form className="sign-up-form">
+            <h2 className="title">Inscribirse</h2>
+            <div className="input-field">
+              <i className="fas fa-user"></i>
+              <input type="text" placeholder="Nombre de usuario" />
+            </div>
+            <div className="input-field">
+              <i className="fas fa-envelope"></i>
+              <input type="email" placeholder="Correo electrónico" />
+            </div>
+            <div className="input-field">
+              <i className="fas fa-lock"></i>
+              <input type="password" placeholder="Contraseña" />
+            </div>
+            <input type="submit" className="btn" value="Registrarse" />
+            
+          </form>
         </div>
-        <Titulo>EcoControl</Titulo>
-        <p className="frase">Toma el control de tus 💵gastos e 💰ingresos</p>
-        <ContainerBtn>
-          <Btnsave titulo="Iniciar con google" icono={<v.iconogoogle />} bgcolor={v.colorSecundario} funcion={signInWithGoogle}/>
-        </ContainerBtn>
       </div>
-    </Container>
+
+      <div className="panels-container">
+        <div className="panel left-panel">
+          <div className="content">
+            <h3>¿Nuevo aquí?</h3>
+            <p>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
+              ex ratione. Aliquid!
+            </p>
+            <button className="btn transparent" onClick={handleSignUp}>
+              Inscribirse
+            </button>
+          </div>
+          <img src={v.reportes} className="image" alt="Reportes" />
+        </div>
+        <div className="panel right-panel">
+          <div className="content">
+            <h3>¿Uno de nosotros?</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
+              laboriosam ad deleniti.
+            </p>
+            <button className="btn transparent" onClick={handleSignIn}>
+              Iniciar sesión
+            </button>
+          </div>
+          <img src={v.billetera} className="image" alt="Billetera"  />
+        </div>
+      </div>
+    </div>
   );
 }
-const Container = styled.div`
-  background-image: url(${(props) => props.imgfondo});
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255, 255, 255, 0.87);
-  text-align: center;
-  .contentCard {
-    background-color: #131313;
-    border-radius: 20px;
-    gap: 30px;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    margin: 20px;
-    box-shadow: 8px 5px 18px 3px rgba(0, 0, 0, 0.35);
-    justify-content:center;
-    width:auto;
-    height:80%;
-    .contentImg{
-      width: 100%;
-      display:flex;
-      justify-content:center;
-    
-      img{
-        width: 40%;
-     
-        animation:flotar 1.5s ease-in-out infinite alternate;
-      }
-    }
-    .frase{
-      color: #909090;
-      font-size: 1.2rem;
-    }
-  }
-  @keyframes flotar {
-    0% {
-      transform: translate(0, 0px);
-    }
-    50% {
-      transform: translate(0, 15px);
-    }
-    100% {
-      transform: translate(0, -0px);
-    }
-  }
-`;
-const Titulo = styled.span`
-  font-size: 5rem;
-  font-weight: 700;
-`;
-const ContainerBtn = styled.div`
-  display: flex;
-  justify-content: center;
-`;
+
+
