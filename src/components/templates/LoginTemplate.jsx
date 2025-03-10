@@ -57,8 +57,7 @@ export function LoginTemplate() {
           <div className="content">
             <h3>¿Nuevo aquí?</h3>
             <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
-              ex ratione. Aliquid!
+              ¡Únete a nuestra comunidad y comienza a disfrutar de todos los beneficios! Regístrate ahora y descubre como organizar tu dinero de manera eficiente. 
             </p>
             <button className="btn transparent" onClick={handleSignUp}>
               Inscribirse
