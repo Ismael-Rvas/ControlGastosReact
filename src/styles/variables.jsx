@@ -1,7 +1,7 @@
 import { CiPalette } from "react-icons/ci";
 import { BsEmojiLaughing } from "react-icons/bs";
 import { RiDeleteBin2Line, RiEditLine } from "react-icons/ri";
-import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { RiVipCrownFill } from "react-icons/ri";
 import { BiUserCircle } from "react-icons/bi";
 import { RiSettings3Line } from "react-icons/ri";
@@ -58,6 +58,7 @@ export const v = {
   colorPrincipal: `#00F34A`,
   boxshadowGray: `0px 10px 15px -3px rgba(0,0,0,0.1)`,
   iconoFlechabajo: IoIosArrowDown,
+  iconoFlechaup: IoIosArrowUp,
   iconocorona: RiVipCrownFill,
   iconoUser: BiUserCircle,
   iconoSettings: RiSettings3Line,

@@ -7,9 +7,9 @@ import {
   useUsuariosStore,
   ListaGenerica,
   TemasData,
-  Btnsave,CardEliminarData,
+  Btnsave,
+  CardEliminarData,
   BtndesplegableComponente,
-  
 } from "../../index";
 import { useState } from "react";
 
@@ -23,11 +23,11 @@ export function ConfiguracionTemplate() {
   //pais moneda
   const moneda = select.symbol ? select.symbol : datausuarios.moneda;
   const pais = select.countryName ? select.countryName : datausuarios.pais;
-  const paisSeleccionado = "🐷 " + moneda + " " + pais;
+  const paisSeleccionado =  moneda + " -->" + pais;
   //tema
   const iconobd = datausuarios.tema === "0" ? "🌞" : "🌚";
   const temabd = datausuarios.tema === "0" ? "light" : "dark";
-  const temainicial = selectTema.tema ? selectTema.tema : temabd;
+  const temainicial = selectTema.descripcion ? selectTema.descripcion : temabd;
   const iconoinicial = selectTema.icono ? selectTema.icono : iconobd;
   const temaSeleccionado = iconoinicial + " " + temainicial;
   //funcion editar
@@ -43,7 +43,6 @@ export function ConfiguracionTemplate() {
   };
   return (
     <Container>
-    
       <header className="header">
         <Header
           stateConfig={{ state: state, setState: () => setState(!state) }}
@@ -76,7 +75,8 @@ export function ConfiguracionTemplate() {
             funcion={() => setStateListaTemas(!stateListaTemas)}
           ></Selector>
           {stateListaTemas && (
-            <ListaGenerica bottom="88%"
+            <ListaGenerica
+              bottom="88%"
               data={TemasData}
               setState={() => setStateListaTemas(!stateListaTemas)}
               funcion={setSelecttema}
@@ -89,12 +89,9 @@ export function ConfiguracionTemplate() {
           icono={<v.iconoguardar />}
           funcion={editar}
         />
-         <BtndesplegableComponente 
-        bgcolor={v.colorselector} 
-        textcolor="white"
-      >
-        <CardEliminarData /> 
-      </BtndesplegableComponente>
+        <BtndesplegableComponente bgcolor={v.colorselector} textcolor="white" title="Eliminar datos">
+          <CardEliminarData />
+        </BtndesplegableComponente>
       </section>
     </Container>
   );
@@ -125,7 +122,7 @@ const Container = styled.div`
     flex-direction: column;
     justify-content: start;
     gap: 30px;
-   
+
     h1 {
       font-size: 3rem;
     }
