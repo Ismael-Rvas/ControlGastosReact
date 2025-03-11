@@ -8,7 +8,10 @@ import {
   useOperaciones,
   useUsuariosStore,
   Barras,
+  Lottieanimacion,
 } from "../../index";
+import vacioverde from "../../assets/vacioverde.json";
+import vaciorojo from "../../assets/vaciorojo.json";
 import { useQuery } from "@tanstack/react-query";
 export function Tabs() {
   const [activeTab, setactiveTab] = useState(0);
@@ -96,6 +99,14 @@ export function Tabs() {
       </ul>
 
       <div className="tab-content">
+      {dataRptMovimientosAñoMes.length === 0 ? (
+          <Lottieanimacion
+            alto="300"
+            ancho="300"
+            animacion={tipo === "i" ? vacioverde : vaciorojo}
+          />
+        ) : (
+          <>
         {activeTab === 0 && (
           <Dona datagrafica={datagrafica} data={dataRptMovimientosAñoMes} titulo={tituloBtnDesMovimientos} />
         )}
@@ -104,6 +115,8 @@ export function Tabs() {
         )}
         {activeTab === 2 && (
           <Barras datagrafica={datagrafica} data={dataRptMovimientosAñoMes} titulo={tituloBtnDesMovimientos}/>
+        )}
+          </>
         )}
       </div>
     </Container>
