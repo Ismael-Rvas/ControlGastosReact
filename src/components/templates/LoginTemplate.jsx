@@ -14,6 +14,8 @@ export function LoginTemplate() {
 
   return (
     <div className={`containerlogin ${signUpMode ? "sign-up-mode" : ""}`}>
+      <img src={v.logo} className="logoright"/>
+      <img src={v.logo} className="logoleft"/>
       <div className="forms-container">
         <div className="signin-signup">
           <form className="sign-in-form">
@@ -29,9 +31,9 @@ export function LoginTemplate() {
             <input type="submit" value="Login" className="btn solid" />
             <p className="social-text">O inicia sección con</p>
             <div className="social-media">
-              <SocialIcon icono={v.google} funcion={signInWithGoogle}/>
-              <SocialIcon icono={v.discord} funcion={signInWithDiscord}/>
-              <SocialIcon icono={v.github} funcion={signInWithGithub}/>
+              <SocialIcon icono={v.google} funcion={signInWithGoogle} />
+              <SocialIcon icono={v.discord} funcion={signInWithDiscord} />
+              <SocialIcon icono={v.github} funcion={signInWithGithub} />
             </div>
           </form>
           <form className="sign-up-form">
@@ -49,7 +51,6 @@ export function LoginTemplate() {
               <input type="password" placeholder="Contraseña" />
             </div>
             <input type="submit" className="btn" value="Registrarse" />
-            
           </form>
         </div>
       </div>
@@ -59,7 +60,8 @@ export function LoginTemplate() {
           <div className="content">
             <h3>¿Quieres registrarte?</h3>
             <p>
-              Regístrate ahora y descubre como organizar tu dinero de manera eficiente. 
+              Regístrate ahora y descubre como organizar tu dinero de manera
+              eficiente.
             </p>
             <button className="btn transparent" onClick={handleSignUp}>
               Registrarse
@@ -70,18 +72,14 @@ export function LoginTemplate() {
         <div className="panel right-panel">
           <div className="content">
             <h3>¿Ya tienes una cuenta?</h3>
-            <p>
-              ¡Logueate desde aqui!
-            </p>
+            <p>¡Logueate desde aqui!</p>
             <button className="btn transparent" onClick={handleSignIn}>
               Iniciar sesión
             </button>
           </div>
-          <img src={v.billetera} className="image" alt="Billetera"  />
+          <img src={v.billetera} className="image" alt="Billetera" />
         </div>
       </div>
     </div>
   );
 }
-
-

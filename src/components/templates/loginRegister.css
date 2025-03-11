@@ -38,6 +38,35 @@ form {
     grid-row: 1 / 2;
 }
 
+.logoright {
+    position: absolute;
+    top: 50px;
+    left: 768px;
+    width: 500px;
+    height: auto;
+    opacity: 0.1;
+    animation: logoGrow 1.2s ease-in-out infinite alternate;
+}
+.logoleft {
+    position: absolute;
+    top: 50px;
+    right: 768px;
+    width: 500px;
+    height: auto;
+    opacity: 0.1;
+    animation: logoGrow 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes logoGrow {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.1);
+    }
+}
+
+
 form.sign-up-form {
     opacity: 0;
     z-index: 1;
