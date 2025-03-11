@@ -6,10 +6,31 @@ import {
   ListaMenuDesplegable,
   DesplegableUser,
   useAuthStore,
+  useAdminStore,
+  fotoUser,
 } from "../../index";
+import { useEffect, useState } from "react";
 export function DataUser({ stateConfig }) {
   const { user } = UserAuth();
   const { signout } = useAuthStore();
+  const [img, setUserImg] = useState(null);
+  const [admin, setAdmin] = useState(false);
+ 
+  useEffect(() => {
+    const esAdmin = async () => {
+      const adminStatus = await useAdminStore(); 
+      setAdmin(adminStatus); 
+    };
+    esAdmin(); 
+
+    const getUserPhoto = async () => {
+      const img = await fotoUser(); 
+      setUserImg(img); 
+    };
+    getUserPhoto(); 
+  }, []); 
+
+  
   const funcionXtipo = async (p) => {
    
     if (p.tipo === "cerrarsesion") {
@@ -20,19 +41,20 @@ export function DataUser({ stateConfig }) {
   return (
     <Container onClick={stateConfig.setState}>
       <div className="imgContainer">
-        <img src={user.picture} />
+        <img src={img} />
       </div>
-
-      <BtnCircular
-        icono={<v.iconocorona />}
-        width="25px"
-        height="25px"
-        bgcolor={`linear-gradient(15deg, rgba(255, 88, 58, 0.86) 9%, #f8bf5b 100%);`}
-        textcolor="#ffffff"
-        fontsize="11px"
-        translatex="-50px"
-        translatey="-12px"
-      />
+      {admin && (
+        <BtnCircular
+          icono={<v.iconocorona />}
+          width="25px"
+          height="25px"
+          bgcolor={`linear-gradient(15deg, rgba(255, 88, 58, 0.86) 9%, #f8bf5b 100%);`}
+          textcolor="#ffffff"
+          fontsize="11px"
+          translatex="-50px"
+          translatey="-12px"
+        />
+      )}
       <span className="nombre">{user.name}</span>
       {stateConfig.state && (
         <ListaMenuDesplegable

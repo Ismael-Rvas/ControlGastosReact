@@ -10,7 +10,6 @@ export const AuthContextProvider = ({ children }) => {
         if (session == null) {
           setUser(null);
         } else {
-          console.log(session?.user.user_metadata);
           setUser(session?.user.user_metadata);
           insertarUsuarios(session?.user.user_metadata, session?.user.id);
         }
@@ -23,7 +22,7 @@ export const AuthContextProvider = ({ children }) => {
   const insertarUsuarios = async (dataProvider, idAuthSupabase) => {
     const p = {
       nombres: dataProvider.name,
-      foto: dataProvider.picture,
+      foto: dataProvider.avatar_url,
       idauth_supabase: idAuthSupabase,
     };
     await InsertarUsuarios(p);

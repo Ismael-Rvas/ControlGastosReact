@@ -7,7 +7,8 @@ import {
   useUsuariosStore,
   ListaGenerica,
   TemasData,
-  Btnsave,CardEliminarData
+  Btnsave,CardEliminarData,
+  BtndesplegableComponente,
   
 } from "../../index";
 import { useState } from "react";
@@ -88,7 +89,12 @@ export function ConfiguracionTemplate() {
           icono={<v.iconoguardar />}
           funcion={editar}
         />
-        <CardEliminarData/>
+         <BtndesplegableComponente 
+        bgcolor={v.colorselector} 
+        textcolor="white"
+      >
+        <CardEliminarData /> 
+      </BtndesplegableComponente>
       </section>
     </Container>
   );

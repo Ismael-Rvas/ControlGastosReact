@@ -16,13 +16,15 @@ import {
   ListaMenuDesplegable,
   Btnfiltro,
   RegistrarMovimientos,
+  Lottieanimacion,
 } from "../../index";
 import { Device } from "../../styles/breakpoints";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import vacioverde from "../../assets/vacioverde.json";
+import vaciorojo from "../../assets/vaciorojo.json";
 export function MovimientosTemplate() {
-  
   const [dataSelect, setdataSelect] = useState([]);
   const [accion, setAccion] = useState("");
   const [openRegistro, SetopenRegistro] = useState(false);
@@ -39,9 +41,7 @@ export function MovimientosTemplate() {
     bgCategoria,
     tituloBtnDesMovimientos,
   } = useOperaciones();
-  useEffect(()=>{
-
-  },[])
+  useEffect(() => {}, []);
   const { idusuario } = useUsuariosStore();
   const {
     totalMesAño,
@@ -66,23 +66,28 @@ export function MovimientosTemplate() {
     setAccion("Nuevo");
     setdataSelect([]);
   }
-  useQuery({queryKey:
-    [
+  useQuery({
+    queryKey: [
       "mostrar movimientos mes año",
       { año: año, mes: mes, idusuario: idusuario, tipocategoria: tipo },
-    ],queryFn:
-    () =>
+    ],
+    queryFn: () =>
       mostrarMovimientos({
         año: año,
         mes: mes,
         idusuario: idusuario,
         tipocategoria: tipo,
-      }),refetchOnWindowFocus:false,
-    });
-  useQuery({queryKey:["mostrar cuentas"],queryFn: () => mostrarCuentas({ idusuario: idusuario })});
-  useQuery({queryKey:["mostrar categorias", { idusuario: idusuario, tipo: tipo }],queryFn: () =>
-    mostrarCategorias({ idusuario: idusuario, tipo: tipo })}
-  );
+      }),
+    refetchOnWindowFocus: false,
+  });
+  useQuery({
+    queryKey: ["mostrar cuentas"],
+    queryFn: () => mostrarCuentas({ idusuario: idusuario }),
+  });
+  useQuery({
+    queryKey: ["mostrar categorias", { idusuario: idusuario, tipo: tipo }],
+    queryFn: () => mostrarCategorias({ idusuario: idusuario, tipo: tipo }),
+  });
 
   return (
     <Container>
@@ -159,7 +164,16 @@ export function MovimientosTemplate() {
         />
       </section>
       <section className="main">
+      {datamovimientos.length == 0 && (
+          <Lottieanimacion
+            alto="300"
+            ancho="300"
+            animacion={tipo == "i" ? vacioverde : vaciorojo}
+          />
+        )}
+        {datamovimientos.length > 0 && (
         <TablaMovimientos data={datamovimientos} />
+        )}
       </section>
     </Container>
   );
@@ -177,14 +191,14 @@ const Container = styled.div`
     "totales" 360px
     "calendario" 100px
     "main" auto;
-    @media ${Device.tablet} {
-      grid-template:
-    "header" 100px
-    "tipo" 100px
-    "totales" 100px
-    "calendario" 100px
-    "main" auto;
-    }
+  @media ${Device.tablet} {
+    grid-template:
+      "header" 100px
+      "tipo" 100px
+      "totales" 100px
+      "calendario" 100px
+      "main" auto;
+  }
 
   .header {
     grid-area: header;
@@ -201,7 +215,7 @@ const Container = styled.div`
   }
   .totales {
     grid-area: totales;
-  //  background-color: rgba(229, 26, 165, 0.14);
+    //  background-color: rgba(229, 26, 165, 0.14);
     display: grid;
     align-items: center;
     grid-template-columns: 1fr;
@@ -213,14 +227,14 @@ const Container = styled.div`
   }
   .calendario {
     grid-area: calendario;
-   // background-color: rgba(77, 237, 106, 0.14);
+    // background-color: rgba(77, 237, 106, 0.14);
     display: flex;
     align-items: center;
     justify-content: center;
   }
   .main {
     grid-area: main;
-   // background-color: rgba(179, 46, 241, 0.14);
+    // background-color: rgba(179, 46, 241, 0.14);
   }
 `;
 const ContentFiltro = styled.div`

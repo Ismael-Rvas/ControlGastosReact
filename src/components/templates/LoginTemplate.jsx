@@ -6,7 +6,7 @@ import { SocialIcon } from "../moleculas/BtnSocial";
 export function LoginTemplate() {
   const { signInWithGoogle } = useAuthStore();
   const { signInWithDiscord } = useAuthStore();
-  // const { signInWithGoogle } = useAuthStore();
+  const { signInWithGithub } = useAuthStore();
   const [signUpMode, setSignUpMode] = useState(false);
 
   const handleSignUp = () => setSignUpMode(true);
@@ -31,7 +31,7 @@ export function LoginTemplate() {
             <div className="social-media">
               <SocialIcon icono={v.google} funcion={signInWithGoogle}/>
               <SocialIcon icono={v.discord} funcion={signInWithDiscord}/>
-              <SocialIcon icono={v.github} />
+              <SocialIcon icono={v.github} funcion={signInWithGithub}/>
             </div>
           </form>
           <form className="sign-up-form">
@@ -57,22 +57,21 @@ export function LoginTemplate() {
       <div className="panels-container">
         <div className="panel left-panel">
           <div className="content">
-            <h3>¿Nuevo aquí?</h3>
+            <h3>¿Quieres registrarte?</h3>
             <p>
-              ¡Únete a nuestra comunidad y comienza a disfrutar de todos los beneficios! Regístrate ahora y descubre como organizar tu dinero de manera eficiente. 
+              Regístrate ahora y descubre como organizar tu dinero de manera eficiente. 
             </p>
             <button className="btn transparent" onClick={handleSignUp}>
-              Inscribirse
+              Registrarse
             </button>
           </div>
           <img src={v.reportes} className="image" alt="Reportes" />
         </div>
         <div className="panel right-panel">
           <div className="content">
-            <h3>¿Uno de nosotros?</h3>
+            <h3>¿Ya tienes una cuenta?</h3>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-              laboriosam ad deleniti.
+              ¡Logueate desde aqui!
             </p>
             <button className="btn transparent" onClick={handleSignIn}>
               Iniciar sesión
