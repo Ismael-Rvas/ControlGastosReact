@@ -4,22 +4,6 @@ import { supabase, InsertarUsuarios } from "../index";
 const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState([]);
-  // const insertarUsuarios = async (dataProvider, idAuthSupabase) => {
-  //   // Verificar si el usuario ya existe
-  //   const { data, error } = await supabase
-  //     .from("usuarios")
-  //     .select("*")
-  //     .eq("idauth_supabase", idAuthSupabase);
-
-  //   if (data.length === 0) {
-  //     // Insertar solo si el usuario no existe
-  //     const { error } = await InsertarUsuarios({
-  //       nombres: dataProvider.name,
-  //       foto: dataProvider.picture,
-  //       idauth_supabase: idAuthSupabase,
-  //     });
-  //   }
-  // };
   useEffect(() => {
     const { data: authListener } = supabase.auth.onAuthStateChange(
       async (event, session) => {

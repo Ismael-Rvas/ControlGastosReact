@@ -5,6 +5,8 @@ import { SocialIcon } from "../moleculas/BtnSocial";
 
 export function LoginTemplate() {
   const { signInWithGoogle } = useAuthStore();
+  const { signInWithDiscord } = useAuthStore();
+  // const { signInWithGoogle } = useAuthStore();
   const [signUpMode, setSignUpMode] = useState(false);
 
   const handleSignUp = () => setSignUpMode(true);
@@ -28,7 +30,7 @@ export function LoginTemplate() {
             <p className="social-text">O inicia sección con</p>
             <div className="social-media">
               <SocialIcon icono={v.google} funcion={signInWithGoogle}/>
-              <SocialIcon icono={v.discord} />
+              <SocialIcon icono={v.discord} funcion={signInWithDiscord}/>
               <SocialIcon icono={v.github} />
             </div>
           </form>

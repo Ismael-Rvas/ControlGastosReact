@@ -14,6 +14,17 @@ export const useAuthStore = create((set) => ({
       return data;
     } catch (error) {}
   },
+  signInWithDiscord: async () => {
+    try {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: "discord",
+      });
+      if (error)
+        throw new Error("A ocurrido un error durante la autenticación");
+      set({ isAuth: true });
+      return data;
+    } catch (error) {}
+  },
   signout: async () => {
     const { error } = await supabase.auth.signOut();
     set({ isAuth: false });
