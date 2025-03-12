@@ -14,11 +14,10 @@ export function LoginTemplate() {
 
   return (
     <div className={`containerlogin ${signUpMode ? "sign-up-mode" : ""}`}>
-      <img src={v.logo} className="logoright"/>
-      <img src={v.logo} className="logoleft"/>
       <div className="forms-container">
         <div className="signin-signup">
           <form className="sign-in-form">
+      <img src={v.logo} className="logoright"/>
             <h2 className="title">Iniciar sesión</h2>
             <div className="input-field">
               <i className="fas fa-user"></i>
@@ -37,6 +36,8 @@ export function LoginTemplate() {
             </div>
           </form>
           <form className="sign-up-form">
+      <img src={v.logo} className="logoleft"/>
+
             <h2 className="title">Inscribirse</h2>
             <div className="input-field">
               <i className="fas fa-user"></i>

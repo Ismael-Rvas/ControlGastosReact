@@ -39,18 +39,14 @@ form {
 }
 
 .logoright {
-    position: absolute;
-    top: 50px;
-    left: 768px;
+    position: fixed;
     width: 500px;
     height: auto;
     opacity: 0.1;
     animation: logoGrow 1.2s ease-in-out infinite alternate;
 }
 .logoleft {
-    position: absolute;
-    top: 50px;
-    right: 768px;
+    position: fixed;
     width: 500px;
     height: auto;
     opacity: 0.1;
