@@ -3,6 +3,9 @@ import {
   AiOutlineHome,
   AiOutlineApartment,
   AiOutlineSetting,
+  AiOutlineWallet,
+  AiOutlineOrderedList,
+  AiOutlineTransaction
 } from "react-icons/ai";
 import { MdOutlineAnalytics } from "react-icons/md";
 
@@ -61,13 +64,18 @@ export const LinksArray = [
     to: "/",
   },
   {
+    label: "Cuenta",
+    icon: <AiOutlineWallet />,
+    to: "/cuenta",
+  },
+  {
     label: "Categorias",
-    icon: <MdOutlineAnalytics />,
+    icon: <AiOutlineOrderedList />,
     to: "/categorias",
   },
   {
     label: "Movimientos",
-    icon: <AiOutlineApartment />,
+    icon: <AiOutlineTransaction />,
     to: "/movimientos",
   },
   {
@@ -75,6 +83,7 @@ export const LinksArray = [
     icon: <MdOutlineAnalytics />,
     to: "/informes",
   }
+  
 ];
 export const SecondarylinksArray = [
   {

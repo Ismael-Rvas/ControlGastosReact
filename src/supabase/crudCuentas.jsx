@@ -6,9 +6,12 @@ export async function MostrarCuentas(p) {
       .select()
       .eq("idusuario", p.idusuario)
       .maybeSingle();
+  
       if (data) {
         return data;
       }
     return data;
-  } catch (error) {}
+  } catch (error) {
+    console.error("Error en la consulta de cuentas:", error);
+  }
 }

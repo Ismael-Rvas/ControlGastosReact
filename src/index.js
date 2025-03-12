@@ -74,3 +74,7 @@ export * from './utils/dataEstatica';
 export * from './store/AdminStore';
 export * from './utils/fotoUser';
 export * from './components/moleculas/Btndesplegarcomponente';
+export * from './components/templates/CuentaTemplate';
+export * from './pages/Cuenta';
+export * from './supabase/crudCuentas';
+export * from './store/CuentaStore';

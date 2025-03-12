@@ -37,6 +37,10 @@ export function DataUser({ stateConfig }) {
      
       await signout();
     }
+    if (p.tipo === "configuracion") {
+     
+      window.location.href = "/configurar";
+    }
   };
   return (
     <Container onClick={stateConfig.setState}>
