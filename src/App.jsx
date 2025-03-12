@@ -10,18 +10,19 @@ import {
   Login,
   SpinnerLoader,
 } from "./index";
-import { useLocation } from "react-router-dom";
-import { createContext, useState } from "react";
+import { Navigate, useLocation } from "react-router-dom";
+import { createContext, useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { styled } from "styled-components";
 import { useQuery } from "@tanstack/react-query";
 export const ThemeContext = createContext(null);
+
 function App() {
   const { mostrarUsuarios, datausuarios } = useUsuariosStore();
-
   const { pathname } = useLocation();
-  // const [theme, setTheme] = useState("dark");
+  const [isFirstLogin, setIsFirstLogin] = useState(false); 
+  const [user, setUser] = useState(null);
   const theme = datausuarios?.tema === "0" ? "light" : "dark";
   const themeStyle = theme === "light" ? Light : Dark;
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -30,7 +31,27 @@ function App() {
     queryFn: () => mostrarUsuarios(),
   });
 
-  if (isLoading) {
+  const { isLoadingg, errorr } = useQuery({
+    queryKey: ["mostrar usuarios"],
+    queryFn: mostrarUsuarios(),
+    onSuccess: () => {
+      setIsDataLoaded(true);
+      if (isFirstLogin) {
+        Navigate("/home");
+      }
+    },
+    onError: () => {
+      setIsDataLoaded(true); 
+    },
+  });
+
+  useEffect(() => {
+    if (user && user.isNew) {
+      setIsFirstLogin(true); 
+    }
+  }, [user]);
+
+  if (isLoading ) {
     return <SpinnerLoader />;
   }
   if (error) {
@@ -61,7 +82,6 @@ function App() {
             ) : (
               <Login />
             )}
-
             <ReactQueryDevtools initialIsOpen={true} />
           </AuthContextProvider>
         </ThemeProvider>

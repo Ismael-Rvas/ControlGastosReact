@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Carousel, Btnsave, v, Header, UserAuth} from "../../index";
-import { useState } from "react";
+import {  useState } from "react";
 
 export function HomeTemplate() {
   const { user } = UserAuth()
