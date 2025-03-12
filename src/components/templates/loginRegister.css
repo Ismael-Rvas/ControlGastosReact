@@ -44,6 +44,7 @@ form {
     height: auto;
     opacity: 0.1;
     animation: logoGrow 1.2s ease-in-out infinite alternate;
+    z-index: -1;
 }
 .logoleft {
     position: fixed;
@@ -51,6 +52,7 @@ form {
     height: auto;
     opacity: 0.1;
     animation: logoGrow 1.2s ease-in-out infinite alternate;
+    z-index: -1;
 }
 
 @keyframes logoGrow {

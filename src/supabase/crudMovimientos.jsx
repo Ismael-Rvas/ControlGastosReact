@@ -6,14 +6,23 @@ export const InsertarMovimientos = async (p) => {
       .from("movimientos")
       .insert(p)
       .select();
-    if (error) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Ya existe un registro con " + p.descripcion,
-        footer: '<a href="">Agregue una nueva descripcion</a>',
-      });
-    }
+      if (error) {
+        if (error.message.includes("La cuenta está inhabilitada")) {
+          Swal.fire({
+            icon: "error",
+            title: "Inavilitada",
+            text: "La cuenta está inhabilitada. No se puede realizar el movimiento.",
+            footer: '<a href="/cuenta">Cambie el estado de su cuenta</a>',
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "La cuenta no puede quedar con un saldo negativo. No se puede realizar el movimiento.",
+            footer: '<a href="/cuenta">Visualiza el saldo de la cuenta</a>',
+          });
+        }
+      }
     if (data) {
       Swal.fire({
         icon: "success",

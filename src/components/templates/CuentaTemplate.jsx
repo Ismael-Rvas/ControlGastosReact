@@ -150,8 +150,8 @@ const CardBack = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const CardBackHeading = styled.h1`
-  font-size: 1rem;
+const CardBackHeading = styled.h2`
+  font-size: 1.3rem;
   font-weight: bold;
   color: #ffffff; 
   text-align: center;
