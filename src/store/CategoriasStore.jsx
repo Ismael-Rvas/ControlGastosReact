@@ -28,7 +28,8 @@ export const useCategoriasStore = create((set, get) => ({
   eliminarCategoria: async (p) => {
     await EliminarCategorias(p);
     const { mostrarCategorias } = get();
-    set(mostrarCategorias(p));
+    const {parametros} =get();
+    set(mostrarCategorias(parametros));
   },
   eliminarCategoriasTodas: async (p) => {
     await EliminarCategoriasTodas(p);
@@ -38,6 +39,7 @@ export const useCategoriasStore = create((set, get) => ({
   editarCategoria: async (p) => {
     await EditarCategorias(p);
     const { mostrarCategorias } = get();
-    set(mostrarCategorias(p));
+    const {parametros} =get();
+    set(mostrarCategorias(parametros));
   },
 }));

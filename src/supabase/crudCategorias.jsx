@@ -11,14 +11,13 @@ export async function InsertarCategorias(p) {
         icon: "error",
         title: "Oops...",
         text: "Ya existe un registro con " + p.descripcion,
-        footer: '<a href="">Agregue una nueva descripcion</a>',
+        footer: '<a href="/categorias">Agregue una nueva descripcion</a>',
       });
     }
     if (data) {
       Swal.fire({
-        position: "top-end",
         icon: "success",
-        title: "Datos guardados",
+        title: "Categoria registrada",
         showConfirmButton: false,
         timer: 1500,
       });
@@ -40,28 +39,38 @@ export async function MostrarCategorias(p) {
 }
 export async function EliminarCategorias(p) {
   try {
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from("categorias")
       .delete()
       .eq("idusuario", p.idusuario)
       .eq("id", p.id);
     if (error) {
       alert("Error al eliminar", error);
-    }
+    }else{Swal.fire({
+      icon: "success",
+      title: "Categoria eliminada",
+      showConfirmButton: false,
+      timer: 1500,
+    });}
   } catch (error) {
     alert(error.error_description || error.message + " eliminar categorias");
   }
 }
 export async function EditarCategorias(p) {
   try {
-    const { error } = await supabase
+    const {data, error } = await supabase
       .from("categorias")
       .update(p)
       .eq("idusuario", p.idusuario)
       .eq("id", p.id);
     if (error) {
       alert("Error al editar categoria", error);
-    }
+    }else{Swal.fire({
+      icon: "success",
+      title: "Categoria actualizada",
+      showConfirmButton: false,
+      timer: 1500,
+    });}
   } catch (error) {
     alert(error.error_description || error.message + " editar categorias");
   }
@@ -71,12 +80,11 @@ export async function EliminarCategoriasTodas(p) {
     const { error } = await supabase
       .from("categorias")
       .delete()
-      .eq("idusuario", p.idusuario)
+      .eq("idusuario", p.idusuario);
     if (error) {
       alert("Error al eliminar", error);
     }
     Swal.fire({
-      position: "top-end",
       icon: "success",
       title: "Datos reseteados",
       showConfirmButton: false,

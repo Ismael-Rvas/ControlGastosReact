@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { MostrarCuentas } from "../index";
+import { EliminarSaldoCuenta, MostrarCuentas } from "../index";
 export const useCuentaStore = create((set, get) => ({
   cuentaItemSelect: [],
   datacuentas: [],
@@ -9,4 +9,9 @@ export const useCuentaStore = create((set, get) => ({
     set({ cuentaItemSelect: response });
     return response;
   },
+  eliminarSaldoCuenta: async (p) => {
+      await EliminarSaldoCuenta(p);
+      const { mostrarCuentas } = get();
+      set(mostrarCuentas(p));
+    },
 }));

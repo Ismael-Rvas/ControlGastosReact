@@ -22,6 +22,7 @@ import { Device } from "../../styles/breakpoints";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import Swal from "sweetalert2";
 import vacioverde from "../../assets/vacioverde.json";
 import vaciorojo from "../../assets/vaciorojo.json";
 export function MovimientosTemplate() {
@@ -52,6 +53,12 @@ export function MovimientosTemplate() {
   } = useMovimientosStore();
   const { mostrarCuentas } = useCuentaStore();
   const { mostrarCategorias } = useCategoriasStore();
+
+  const { data: categorias, isLoading } = useQuery({
+    queryKey: ["mostrar categorias", { idusuario: idusuario, tipo: tipo }],
+    queryFn: () => mostrarCategorias({ idusuario: idusuario, tipo: tipo }),
+  });
+
   function openTipo() {
     setStateTipo(!stateTipo);
     setState(false);
@@ -62,6 +69,17 @@ export function MovimientosTemplate() {
     setState(false);
   }
   function nuevoRegistro() {
+    if (isLoading) return;
+
+    if (!categorias || categorias.length === 0) {
+      Swal.fire({
+        icon: "error",
+        title: "No existe ninguna categoría de " + (tipo === "i" ? "ingresos" : "gastos"),
+        text: "Crea al menos una categoría para registrar un movimiento",
+        footer: '<a href="/categorias">Agregue una nueva categoria</a>',
+      });
+      return; 
+    }
     SetopenRegistro(!openRegistro);
     setAccion("Nuevo");
     setdataSelect([]);

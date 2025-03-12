@@ -44,7 +44,6 @@ export const useMovimientosStore = create((set, get) => ({
   },
   insertarMovimientos: async (p) => {
     await InsertarMovimientos(p);
-
     const { mostrarMovimientos } = get();
     const { parametros } = get();
     set(mostrarMovimientos(parametros));

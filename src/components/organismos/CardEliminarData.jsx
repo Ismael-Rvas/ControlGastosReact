@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import { Btnsave } from "../moleculas/Btnsave";
 import { v } from "../../styles/variables";
-import { useCategoriasStore, useUsuariosStore } from "../../index";
+import { useCategoriasStore, useUsuariosStore, useCuentaStore } from "../../index";
 import Swal from "sweetalert2";
 export function CardEliminarData() {
   const { eliminarCategoriasTodas } = useCategoriasStore();
+  const { eliminarSaldoCuenta} = useCuentaStore()
   const { datausuarios } = useUsuariosStore();
   const eliminar = async () => {
     Swal.fire({
@@ -21,6 +22,7 @@ export function CardEliminarData() {
           idusuario: datausuarios.id,
         };
         await eliminarCategoriasTodas(p);
+        await eliminarSaldoCuenta(p);
       }
     });
   };
@@ -32,7 +34,7 @@ export function CardEliminarData() {
         <br />
         *Esto no podra deshacerse
         <br />
-        *Se reseteara tambien los saldos acumulados en tus cuentas.
+        *Se reseteara tambien los saldos acumulados en tu cuenta.
       </span>
       <Btnsave
         titulo="resetear"
@@ -73,9 +75,8 @@ const Container = styled.div`
     font-size: 120%;
   }
   .contentImg {
-    position: absolute;
-    bottom: 20;
-    right: 0;
+    position: fixed;
+    margin-left: 800px;
     width: 20%;
     opacity: 0.3;
     img {
