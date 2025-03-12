@@ -1,130 +1,118 @@
-import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { v } from "../../../styles/variables";
+import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
 import {
   InputText,
-  Spinner,
-  useOperaciones,
   Btnsave,
+  Spinner,
+  useCuentaStore,
   useUsuariosStore,
-  useCategoriasStore,
+  v,
+  InputNumber,
 } from "../../../index";
-import { useForm } from "react-hook-form";
-import { CirclePicker } from "react-color";
 import Emojipicker from "emoji-picker-react";
+import { Switch } from "@mui/material";
 
-export function RegistrarCategorias({ onClose, dataSelect, accion }) {
-  const { insertarCategorias, editarCategoria } = useCategoriasStore();
+export function RegistrarCuenta({ onClose, dataSelect, accion }) {
+  const { editarCuenta } = useCuentaStore();
   const { datausuarios } = useUsuariosStore();
+  const [estado, setEstado] = useState(true);
+  const [estadoProceso, setEstadoproceso] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
   const [emojiselect, setEmojiselect] = useState("😻");
-  const [currentColor, setColor] = useState("#F44336");
-
-  const [estadoProceso, setEstadoproceso] = useState(false);
-  const { tipo } = useOperaciones();
-  function onEmojiClick(emojiObject) {
-    setEmojiselect(() => emojiObject.emoji);
-    setShowPicker(false);
-  }
-  function elegirColor(color) {
-    setColor(color.hex);
-  }
-
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  async function insertar(data) {
-    if (accion === "Editar") {
-      const p = {
-        descripcion: data.descripcion,
-        color: currentColor,
-        icono: emojiselect,
-        id: dataSelect.id,
-        idusuario:datausuarios.id,
-        tipo: tipo,
-      };
-      try {
-        setEstadoproceso(true);
-        await editarCategoria(p);
-        setEstadoproceso(false);
-        onClose();
-      } catch (error) {}
-    } else {
-      const p = {
-        descripcion: data.descripcion,
-        color: currentColor,
-        icono: emojiselect,
-        idusuario: datausuarios.id,
-        tipo: tipo,
-      };
-      try {
-        setEstadoproceso(true);
-        await insertarCategorias(p);
-        setEstadoproceso(false);
 
-        onClose();
-      } catch (error) {
-        alert("error ingresar Form");
-      }
+  const onEmojiClick = (emojiObject) => {
+    setEmojiselect(emojiObject.emoji);
+    setShowPicker(false);
+  };
+
+  const editar = async (data) => {
+    const p = {
+      saldo_actual: parseFloat(data.monto),
+      icono: emojiselect,
+      estado: estado ? 1 : 0,
+      tipo_cuenta: data.tipo_cuenta,
+      id: dataSelect[0].id,
+      idusuario: datausuarios?.id,
+    };
+    console.log(p);
+
+    try {
+      setEstadoproceso(true);
+      await editarCuenta(p);
+      setEstadoproceso(false);
+      onClose();
+    } catch (error) {
+      setEstadoproceso(false);
+      console.log(error);
     }
-  }
+  };
   useEffect(() => {
     if (accion === "Editar") {
-      setEmojiselect(dataSelect.icono);
-      setColor(dataSelect.color);
-    } 
+      setEmojiselect(dataSelect[0].icono);
+    }
   }, []);
+
+  function estadoControl(e) {
+    setEstado(e.target.checked);
+  }
+
+  useEffect(() => {
+    if (accion === "Editar") {
+      setEstado(!!dataSelect[0].estado);
+    }
+  }, []);
+
   return (
     <Container>
       {estadoProceso && <Spinner />}
-
+      
       <div className="sub-contenedor">
         <div className="headers">
           <section>
             <h1>
-              {accion == "Editar"
-                ? "Editar categoria"
-                : "Registrar nueva categoria"}
+              {accion === "Editar" ? "Editar Cuenta" : "Registrar nueva Cuenta"}
             </h1>
           </section>
-
           <section>
             <span onClick={onClose}>x</span>
           </section>
         </div>
 
-        <form className="formulario" onSubmit={handleSubmit(insertar)}>
+        <form className="formulario" onSubmit={handleSubmit(editar)}>
           <section>
             <div>
-              <InputText
-                defaultValue={dataSelect.descripcion}
+              <label htmlFor="saldo" className="label">
+                <br />
+                Saldo:
+                <br />
+                <br />
+              </label>
+
+              <InputNumber
+                defaultValue={dataSelect[0].saldo_actual}
                 register={register}
-                placeholder="Descripcion"
+                placeholder="Saldo actual"
                 errors={errors}
                 style={{ textTransform: "capitalize" }}
-                name="descripcion"
               />
             </div>
-            <div className="colorContainer">
-              <ContentTitle>
-                {<v.paletacolores />}
-                <span>Color</span>
-              </ContentTitle>
-              <div className="colorPickerContent">
-                <CirclePicker onChange={elegirColor} color={currentColor} />
-              </div>
-            </div>
+
             <div>
+              <br />
               <ContentTitle>
                 <input
-                readOnly={true}
+                  readOnly
                   value={emojiselect}
                   type="text"
                   onClick={() => setShowPicker(!showPicker)}
-                ></input>
-                <span>icono</span>
+                />
+                <span>Icono</span>
               </ContentTitle>
               {showPicker && (
                 <ContainerEmojiPicker>
@@ -132,6 +120,34 @@ export function RegistrarCategorias({ onClose, dataSelect, accion }) {
                 </ContainerEmojiPicker>
               )}
             </div>
+
+            <div>
+              <label htmlFor="tipo" className="label">
+                <br />
+                Tipo Cuenta:
+                <br />
+                <br />
+              </label>
+
+              <InputText
+                defaultValue={dataSelect[0].tipo_cuenta}
+                register={register}
+                placeholder="Tipo de cuenta"
+                errors={errors}
+                name="tipo_cuenta"
+              />
+            </div>
+
+            <div>
+              <span>{<v.iconocheck />}</span>
+              <label>Activa:</label>
+              <Switch
+                onChange={estadoControl}
+                checked={estado}
+                color="warning"
+              />
+            </div>
+
             <div className="btnguardarContent">
               <Btnsave
                 icono={<v.iconoguardar />}
@@ -145,6 +161,7 @@ export function RegistrarCategorias({ onClose, dataSelect, accion }) {
     </Container>
   );
 }
+
 const Container = styled.div`
   transition: 0.5s;
   top: 0;
@@ -177,22 +194,18 @@ const Container = styled.div`
         font-size: 20px;
         font-weight: 500;
       }
+
       span {
         font-size: 20px;
         cursor: pointer;
       }
     }
+
     .formulario {
       section {
         gap: 20px;
         display: flex;
         flex-direction: column;
-        .colorContainer {
-          .colorPickerContent {
-            padding-top: 15px;
-            min-height: 50px;
-          }
-        }
       }
     }
   }
@@ -206,17 +219,20 @@ const ContentTitle = styled.div`
   svg {
     font-size: 25px;
   }
-  input {
+
+  input,
+  select {
     border: none;
     outline: none;
     background: transparent;
-    padding: 2px;
-    width: 40px;
-    font-size: 28px;
+    padding: 8px;
+    font-size: 14px;
   }
 `;
+
 const ContainerEmojiPicker = styled.div`
   position: absolute;
+  z-index: 100;
   display: flex;
   justify-content: center;
   align-items: center;

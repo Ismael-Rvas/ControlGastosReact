@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import { supabase } from "../index";
 export async function MostrarCuentas(p) {
   try {
@@ -5,20 +6,17 @@ export async function MostrarCuentas(p) {
       .from("cuenta")
       .select()
       .eq("idusuario", p.idusuario)
-      .maybeSingle();
-  
       if (data) {
         return data;
       }
     return data;
   } catch (error) {
-    console.error("Error en la consulta de cuentas:", error);
+    console.error("Error en la consulta de cuentas:", error);s
   }
 }
 
 export async function EliminarSaldoCuenta(p) {
   try {
-    console.log("ID Usuario:", p.idusuario);
     const { error } = await supabase
       .from("cuenta")
       .update({ saldo_actual: 0 })
@@ -30,6 +28,32 @@ export async function EliminarSaldoCuenta(p) {
     }
   } catch (error) {
     alert(error.error_description || error.message + " actualizar saldo");
+  }
+}
+
+export async function EditarCuenta(p) {
+  try {
+    const { data, error } = await supabase
+      .from("cuenta")
+      .update(p)
+      .eq("idusuario", p.idusuario) 
+      .eq("id", p.id)
+      .select();
+
+    if (error) {
+      console.error("❌ Error al editar cuenta:", error);
+    } else {
+      Swal.fire({
+        icon: "success",
+        title: "Cuenta actualizada",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+
+    return data;
+  } catch (error) {
+    console.error("❌ Error en EditarCuenta:", error);
   }
 }
 

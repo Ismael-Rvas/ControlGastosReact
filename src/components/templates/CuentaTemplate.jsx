@@ -1,21 +1,61 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { v } from "../../index";
-import { Header, UserAuth } from "../../index";
-import { useCuentaStore, useUsuariosStore } from "../../index";
+import { Btnfiltro, useOperaciones, v } from "../../index";
+import {
+  Header,
+  UserAuth,
+  useCuentaStore,
+  useUsuariosStore,
+  RegistrarCuenta,
+} from "../../index";
 import { useQuery } from "@tanstack/react-query";
-export function CuentaTemplate() {
+export function CuentaTemplate({ data }) {
   const { idusuario } = useUsuariosStore();
   const { datacuentas, mostrarCuentas } = useCuentaStore();
   const [state, setState] = useState(false);
   const { user } = UserAuth();
+  const [openRegistro, SetopenRegistro] = useState(false);
+  const [accion, setAccion] = useState("");
+  const [dataSelect, setdataSelect] = useState([]);
+  const { colorCategoria, tituloBtnDes, bgCategoria, setTipo, tipo } =
+    useOperaciones();
+  const [stateTipo, setStateTipo] = useState(false);
+
   useQuery({
     queryKey: ["mostrar cuentas", idusuario],
     queryFn: () => mostrarCuentas({ idusuario }),
     refetchOnWindowFocus: false,
   });
+
+  function cambiarTipo(p) {
+    setTipo(p);
+    setStateTipo(!stateTipo);
+    setState(false);
+  }
+
+  function cerrarDesplegables() {
+    setStateTipo(false);
+    setState(false);
+  }
+
+  function openTipo() {
+    setStateTipo(!stateTipo);
+    setState(false);
+  }
+
+  function openUser() {
+    setState(!state);
+    setStateTipo(false);
+  }
+
+  function editarCuenta(data) {
+    SetopenRegistro(true);
+    setAccion("Editar");
+    setdataSelect(data[0]);
+  }
+
   return (
-    <Container>
+    <Container onClick={cerrarDesplegables}>
       <header className="header">
         <Header
           stateConfig={{ state: state, setState: () => setState(!state) }}
@@ -23,9 +63,9 @@ export function CuentaTemplate() {
       </header>
 
       <section className="area2">
-        <h1>{datacuentas?.descripcion}</h1>
+        <h1>{datacuentas[0]?.descripcion}</h1>
         <ContentCard>
-          {datacuentas && (
+          {datacuentas[0] && (
             <CardContainer>
               <CardFlipper>
                 <CardFront>
@@ -33,25 +73,43 @@ export function CuentaTemplate() {
                     <h2>{user.name}</h2>
                     <img src={v.logo} className="logoWallet" />
                   </CardHeader>
-                  <CardNumber>{datacuentas?.idusuario}</CardNumber>
+                  <CardNumber>{datacuentas[0]?.idusuario}</CardNumber>
                   <CardFooter>
                     <span>
-                      Cuenta de {datacuentas?.tipo_cuenta} {datacuentas?.icono}
+                      Cuenta de {datacuentas[0]?.tipo_cuenta}{" "}
+                      {datacuentas[0]?.icono}
                     </span>
                     <span
-                      className={datacuentas?.estado ? "activa" : "desactivada"}
+                      className={
+                        datacuentas[0]?.estado ? "activa" : "desactivada"
+                      }
                     ></span>
                   </CardFooter>
                 </CardFront>
 
                 <CardBack>
-                <CardBackHeading>Saldo actual:</CardBackHeading>
-                <CardBackSpan>{datacuentas?.saldo_actual} €</CardBackSpan>
+                  <CardBackHeading>Saldo actual:</CardBackHeading>
+                  <CardBackSpan>{datacuentas[0]?.saldo_actual} €</CardBackSpan>
                 </CardBack>
               </CardFlipper>
             </CardContainer>
           )}
         </ContentCard>
+        <ContentFiltro>
+          <Btnfiltro
+            funcion={editarCuenta}
+            bgcolor="#E6FFE7"
+            textcolor="#228B22"
+            icono={<v.editar />}
+          />
+          {openRegistro && (
+            <RegistrarCuenta
+              dataSelect={data}
+              onClose={() => SetopenRegistro(false)}
+              accion={accion}
+            />
+          )}
+        </ContentFiltro>
       </section>
     </Container>
   );
@@ -153,16 +211,16 @@ const CardBack = styled.div`
 const CardBackHeading = styled.h2`
   font-size: 1.3rem;
   font-weight: bold;
-  color: #ffffff; 
+  color: #ffffff;
   text-align: center;
 `;
 
 const CardBackSpan = styled.span`
   font-size: 1.8rem;
   font-weight: 500;
-  color: #ffffcc; 
+  color: #ffffcc;
   text-align: center;
-  display: block; 
+  display: block;
 `;
 
 const CardHeader = styled.div`
@@ -217,4 +275,9 @@ const CardFooter = styled.div`
     border-radius: 50%;
     background-color: #ff0000;
   }
+`;
+const ContentFiltro = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 50%;
 `;

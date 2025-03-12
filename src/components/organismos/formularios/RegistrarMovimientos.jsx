@@ -12,7 +12,8 @@ import {
   InputText,
   useCuentaStore,
   v,
-  Btnsave,useUsuariosStore
+  Btnsave,useUsuariosStore,
+  EditarMovimientos
 } from "../../../index";
 import { useEffect } from "react";
 export function RegistrarMovimientos({ setState, state, dataSelect, accion }) {
@@ -46,7 +47,7 @@ export function RegistrarMovimientos({ setState, state, dataSelect, accion }) {
       };
       try {
         setEstadoproceso(true);
-        await editarMovimiento(p);
+        await EditarMovimiento(p);
         setEstadoproceso(false);
         onClose();
       } catch (error) {}
@@ -62,7 +63,7 @@ export function RegistrarMovimientos({ setState, state, dataSelect, accion }) {
       estado: estadoText,
       fecha: data.fecha,
       descripcion: data.descripcion,
-      idcuenta: cuentaItemSelect.id,
+      idcuenta: cuentaItemSelect[0].id,
       valor: parseFloat(data.monto),
       idcategoria: categoriaItemSelect.id,
     };
@@ -115,7 +116,7 @@ export function RegistrarMovimientos({ setState, state, dataSelect, accion }) {
                 <InputNumber
                   defaultValue={dataSelect.valor}
                   register={register}
-                  placeholder="Ingrese monto"
+                  placeholder="Ingrese cantidad"
                   errors={errors}
                   icono={<v.iconocalculadora />}
                 />
@@ -149,6 +150,7 @@ export function RegistrarMovimientos({ setState, state, dataSelect, accion }) {
                 placeholder="Ingrese una descripcion"
                 errors={errors}
                 style={{ textTransform: "capitalize" }}
+                name="descripcion"
               />
             </div>
             <ContainerCategoria>

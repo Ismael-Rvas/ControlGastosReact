@@ -7,32 +7,24 @@ export function InputText({
   placeholder,
   register,
   errors,
+  name, 
 }) {
   return (
-   
     <Container>
-    
-        <input
+      <input
         style={style}
         onChange={onChange}
         type="text"
         defaultValue={defaultValue}
         placeholder={placeholder}
-        {...register("descripcion", { required: true, minLength: 2 })}
-      ></input>
+        {...register(name, { required: true, minLength: 2 })}
+      />
 
-
-    
-      {errors.descripcion?.type === "required" && (
-       
-          <p>Campo requerido</p>
-        
+      {errors[name]?.type === "required" && (
+        <p>Campo requerido</p>
       )}
-      {errors.descripcion?.type === "minLength" && (
-     
-<p>Debe tener al menos 2 caracteres</p>
-
-      
+      {errors[name]?.type === "minLength" && (
+        <p>Debe tener al menos 2 caracteres</p>
       )}
     </Container>
   );

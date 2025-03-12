@@ -8,6 +8,7 @@ import { RiSettings3Line } from "react-icons/ri";
 import { MdExitToApp } from "react-icons/md";
 import { FcPicture } from "react-icons/fc";
 import { CgMathPlus } from "react-icons/cg";
+import { CgCreditCard } from "react-icons/cg";
 import { TbBrandSupabase } from "react-icons/tb";
 import { FaReact } from "react-icons/fa";
 import { BsArrowDown, BsArrowUpShort } from "react-icons/bs";
@@ -67,6 +68,7 @@ export const v = {
   verde: `#53B257`,
   rojo: `#F54E41`,
   agregar: CgMathPlus,
+  editar: CgCreditCard,
   iconosupabase: TbBrandSupabase,
   iconoreact: FaReact,
   flechaabajolarga: BsArrowDown,

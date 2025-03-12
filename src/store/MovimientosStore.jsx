@@ -4,6 +4,7 @@ import {
   InsertarMovimientos,
   EliminarMovimientos,
   RptMovimientosPorMesAño,
+  EditarMovimientos,
 } from "../index";
 export const useMovimientosStore = create((set, get) => ({
   datamovimientos: [],

@@ -78,3 +78,5 @@ export * from './components/templates/CuentaTemplate';
 export * from './pages/Cuenta';
 export * from './supabase/crudCuentas';
 export * from './store/CuentaStore';
+export * from './components/organismos/formularios/RegistrarCuenta';
+
