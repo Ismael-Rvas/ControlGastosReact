@@ -15,7 +15,7 @@ export function DataUser({ stateConfig }) {
   const { signout } = useAuthStore();
   const [img, setUserImg] = useState(null);
   const [admin, setAdmin] = useState(false);
- 
+
   useEffect(() => {
     const esAdmin = async () => {
       const adminStatus = await useAdminStore(); 

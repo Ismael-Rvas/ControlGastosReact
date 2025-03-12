@@ -17,7 +17,7 @@ export function CuentaTemplate({ data }) {
   const [openRegistro, SetopenRegistro] = useState(false);
   const [accion, setAccion] = useState("");
   const [dataSelect, setdataSelect] = useState([]);
-  const { colorCategoria, tituloBtnDes, bgCategoria, setTipo, tipo } =
+  const { setTipo } =
     useOperaciones();
   const [stateTipo, setStateTipo] = useState(false);
 

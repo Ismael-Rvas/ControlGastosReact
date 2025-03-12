@@ -1,18 +1,34 @@
 import styled from "styled-components";
-import { Carousel, Btnsave, v } from "../../index";
+import { Carousel, Btnsave, v, Header, UserAuth} from "../../index";
+import { useState } from "react";
 
 export function HomeTemplate() {
+  const { user } = UserAuth()
+  const [state, setState] = useState(false);
+
   return (
     <Main>
+       <header className="header">
+        {user ? (
+          <Header stateConfig={{ state, setState: () => setState(!state) }} />
+        ) : (
+          <button
+            onClick={() => (window.location.href = "/login")}
+          >
+            Iniciar Sesión
+          </button>
+        )}
+      </header>
+
       <Container>
         <Box>
           <Carousel />
         </Box>
         <Title>
-          Bienvenido a EcoControl <br /> 
+          Bienvenido a EcoControl <br />
         </Title>
         <SubText>
-        EcoControl es un proyecto de práctica, donde se busca crear una
+          EcoControl es un proyecto de práctica, donde se busca crear una
           herramienta gratuita y sencilla para controlar gastos e ingresos.
           <br />
         </SubText>
@@ -25,7 +41,8 @@ export function HomeTemplate() {
           </div>
         </ContainerAutor>
         <ButtonContainer>
-          <Btnsave url="https://github.com/Ismael-Rvas"
+          <Btnsave
+            url="https://github.com/Ismael-Rvas"
             titulo="Github"
             bgcolor="#BF94FF"
             icono={<v.iconoreact />}
@@ -44,7 +61,17 @@ const Main = styled.main`
   align-items: center;
   position: relative;
   overflow: hidden;
-  
+  color: ${({ theme }) => theme.text};
+  display: grid;
+  grid-template:
+    "header" 100px
+    "area2" auto;
+
+  .header {
+    grid-area: header;
+    display: flex;
+    align-items: center;
+  }
 `;
 const Container = styled.div`
   width: 75%;
@@ -53,8 +80,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  text-align:center;
-  
+  text-align: center;
 `;
 const Box = styled.div`
   width: 50%;
@@ -125,7 +151,7 @@ const ContainerAutor = styled.div`
   .contentDescripcion {
     display: flex;
     flex-direction: column;
-    b{
+    b {
       color: ${(props) => props.theme.text};
     }
     span {
@@ -137,7 +163,7 @@ const ButtonContainer = styled.div`
   width: 80%;
   margin: 1rem auto;
   align-self: center;
-  justify-content:center;
+  justify-content: center;
   display: flex;
   gap: 20px;
   @media (max-width: 64em) {
