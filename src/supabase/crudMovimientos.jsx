@@ -54,13 +54,13 @@ export async function EditarMovimientos(p) {
     const { error } = await supabase
       .from("movimientos")
       .update(p)
-      .eq("idusuario", p.idusuario)
-      .eq("id", p.id);
+      .eq("id", p.id)
+      .eq("idcuenta", p.idcuenta)
     if (error) {
-      alert("Error al editar movimiento", error);
+      console.log("Error move", error);
     }
   } catch (error) {
-    alert(error.error_description || error.message + " editar movimientos");
+    console.error("Error al editar movimiento:", error);
   }
 }
 export async function MostrarMovimientosPorMesAño(p) {

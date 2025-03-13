@@ -31,25 +31,25 @@ function App() {
     queryFn: () => mostrarUsuarios(),
   });
 
-  const { isLoadingg, errorr } = useQuery({
-    queryKey: ["mostrar usuarios"],
-    queryFn: mostrarUsuarios(),
-    onSuccess: () => {
-      setIsDataLoaded(true);
-      if (isFirstLogin) {
-        Navigate("/home");
-      }
-    },
-    onError: () => {
-      setIsDataLoaded(true); 
-    },
-  });
+  // const { isLoadingg, errorr } = useQuery({
+  //   queryKey: ["mostrar usuarios"],
+  //   queryFn: mostrarUsuarios(),
+  //   onSuccess: () => {
+  //     setIsDataLoaded(true);
+  //     if (isFirstLogin) {
+  //       window.location.reload();
+  //     }
+  //   },
+  //   onError: () => {
+  //     setIsDataLoaded(true);
+  //   },
+  // });
 
-  useEffect(() => {
-    if (user && user.isNew) {
-      setIsFirstLogin(true); 
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user && user.isNew) {
+  //     setIsFirstLogin(true);
+  //   }
+  // }, [user]);
 
   if (isLoading ) {
     return <SpinnerLoader />;

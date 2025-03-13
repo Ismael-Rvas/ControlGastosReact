@@ -74,11 +74,13 @@ export function MovimientosTemplate() {
     if (!categorias || categorias.length === 0) {
       Swal.fire({
         icon: "error",
-        title: "No existe ninguna categoría de " + (tipo === "i" ? "ingresos" : "gastos"),
+        title:
+          "No existe ninguna categoría de " +
+          (tipo === "i" ? "ingresos" : "gastos"),
         text: "Crea al menos una categoría para registrar un movimiento",
         footer: '<a href="/categorias">Agregue una nueva categoria</a>',
       });
-      return; 
+      return;
     }
     SetopenRegistro(!openRegistro);
     setAccion("Nuevo");
@@ -113,7 +115,8 @@ export function MovimientosTemplate() {
         <RegistrarMovimientos
           dataSelect={dataSelect}
           state={openRegistro}
-          setState={() => SetopenRegistro(!openRegistro)}
+          onClose={() => SetopenRegistro(!openRegistro)}
+          accion={accion}
         />
       )}
 
@@ -182,7 +185,7 @@ export function MovimientosTemplate() {
         />
       </section>
       <section className="main">
-      {datamovimientos.length == 0 && (
+        {datamovimientos.length == 0 && (
           <Lottieanimacion
             alto="300"
             ancho="300"
@@ -190,7 +193,12 @@ export function MovimientosTemplate() {
           />
         )}
         {datamovimientos.length > 0 && (
-        <TablaMovimientos data={datamovimientos} />
+          <TablaMovimientos
+            data={datamovimientos}
+            SetopenRegistro={SetopenRegistro}
+            setdataSelect={setdataSelect}
+            setAccion={setAccion}
+          />
         )}
       </section>
     </Container>

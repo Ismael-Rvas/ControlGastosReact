@@ -12,17 +12,19 @@ import {
   InputText,
   useCuentaStore,
   v,
-  Btnsave,useUsuariosStore,
-  EditarMovimientos
+  Btnsave,
+  useUsuariosStore,
+  EditarMovimientos,
 } from "../../../index";
 import { useEffect } from "react";
-export function RegistrarMovimientos({ setState, state, dataSelect, accion }) {
+export function RegistrarMovimientos({ onClose, dataSelect, accion }) {
+  const { datausuarios } = useUsuariosStore();
   const { cuentaItemSelect } = useCuentaStore();
   const { datacategoria, categoriaItemSelect, selectCategoria } =
     useCategoriasStore();
   const { tipo } = useOperaciones();
-  const { insertarMovimientos } = useMovimientosStore();
- 
+  const { insertarMovimientos, editarMovimiento } = useMovimientosStore();
+  const [estadoProceso, setEstadoproceso] = useState(false);
   const [estado, setEstado] = useState(true);
   const [ignorar, setIgnorar] = useState(false);
   const [stateCategorias, setStateCategorias] = useState(false);
@@ -40,43 +42,44 @@ export function RegistrarMovimientos({ setState, state, dataSelect, accion }) {
         estado: estado ? 1 : 0,
         fecha: data.fecha,
         descripcion: data.descripcion,
-        idcuenta: cuentaItemSelect.id,
+        idcuenta: cuentaItemSelect[0].id,
         valor: parseFloat(data.monto),
         idcategoria: categoriaItemSelect.id,
-        idusuario: datausuarios.id,
+        id: dataSelect.id,
       };
       try {
         setEstadoproceso(true);
-        await EditarMovimiento(p);
+        console.log("entro");
+        console.log(p);
+        await editarMovimiento(p);
         setEstadoproceso(false);
         onClose();
-      } catch (error) {}
+      } catch (error) {
+        console.error("Error al editar movimiento:", error);
+      }
     } else {
-      
-    let estadoText = 0;
-    if (estado) {
-      estadoText = 1;
+      let estadoText = 0;
+      if (estado) {
+        estadoText = 1;
+      }
+
+      const p = {
+        tipo: tipo,
+        estado: estadoText,
+        fecha: data.fecha,
+        descripcion: data.descripcion,
+        idcuenta: cuentaItemSelect[0].id,
+        valor: parseFloat(data.monto),
+        idcategoria: categoriaItemSelect.id,
+      };
+
+      try {
+        await insertarMovimientos(p);
+        onClose();
+      } catch (err) {
+        console.error("Error al insertar movimiento:", err);
+      }
     }
-
-    const p = {
-      tipo: tipo,
-      estado: estadoText,
-      fecha: data.fecha,
-      descripcion: data.descripcion,
-      idcuenta: cuentaItemSelect[0].id,
-      valor: parseFloat(data.monto),
-      idcategoria: categoriaItemSelect.id,
-    };
-
-
-    try {
-      await insertarMovimientos(p);
-      setState();
-    } catch (err) {
-      alert(err);
-    }
-  }
-
   };
   function estadoControl(e) {
     setEstado(e.target.checked);
@@ -85,10 +88,10 @@ export function RegistrarMovimientos({ setState, state, dataSelect, accion }) {
   useEffect(() => {
     if (accion === "Editar") {
       setEstado(dataSelect.estado === 1);
-    } 
+    }
   }, []);
   return (
-    <Container onClick={setState}>
+    <Container onClick={onClose}>
       <div
         className="sub-contenedor"
         onClick={(e) => {
@@ -104,7 +107,7 @@ export function RegistrarMovimientos({ setState, state, dataSelect, accion }) {
             </h1>
           </div>
           <div>
-            <span onClick={setState}>{<v.iconocerrar />}</span>
+            <span onClick={onClose}>{<v.iconocerrar />}</span>
           </div>
         </div>
 
@@ -134,7 +137,8 @@ export function RegistrarMovimientos({ setState, state, dataSelect, accion }) {
             <ContainerFecha>
               <label>Fecha:</label>
 
-              <input defaultValue={fechaactual.toJSON().slice(0,10)}
+              <input
+                defaultValue={fechaactual.toJSON().slice(0, 10)}
                 type="date"
                 {...register("fecha", { required: true })}
               ></input>
