@@ -7,7 +7,9 @@ import {
   AiOutlineOrderedList,
   AiOutlineTransaction
 } from "react-icons/ai";
-import { MdOutlineAnalytics } from "react-icons/md";
+import { MdOutlineAnalytics,
+  MdNotes
+ } from "react-icons/md";
 
 export const DesplegableUser = [
   {
@@ -85,7 +87,7 @@ export const LinksArray = [
   },
   {
     label: "Notas API",
-    icon: <MdOutlineAnalytics />,
+    icon: <MdNotes />,
     to: "/notasApi",
   }
   

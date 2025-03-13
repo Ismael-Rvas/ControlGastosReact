@@ -1,4 +1,4 @@
-import {NotasApiTemplate } from "../index";
+import {  NotasApiTemplate } from "../index";
 export function NotasApi() {
   return <NotasApiTemplate />;
 }
