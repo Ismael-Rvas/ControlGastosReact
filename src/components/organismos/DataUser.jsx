@@ -41,6 +41,10 @@ export function DataUser({ stateConfig }) {
      
       window.location.href = "/configurar";
     }
+    if (p.tipo === "perfil") {
+     
+      window.location.href = "/perfil";
+    }
   };
   return (
     <Container onClick={stateConfig.setState}>

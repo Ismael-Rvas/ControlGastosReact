@@ -13,7 +13,7 @@ export const DesplegableUser = [
   {
     text: "Mi perfil",
     icono: <v.iconoUser/>,
-    tipo: "miperfil",
+    tipo: "perfil",
   },
   {
     text: "Configuracion",

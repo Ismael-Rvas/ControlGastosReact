@@ -15,15 +15,11 @@ export const MostrarUsuarios = async () => {
       .select()
       .eq("idauth_supabase", idAuthSupabase)
       .maybeSingle();
-    // if (error) {
-    //   alert("MostrarUsuarios", error);
-    // }
+
     if (data) {
       return data;
     }
-  } catch (error) {
-    // alert(error.error_description || error.message + "MostrarUsuarios");
-  }
+  } catch (error) {}
 };
 export async function EditarTemaMonedaUser(p) {
   try {
