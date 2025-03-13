@@ -7,15 +7,18 @@ export function HomeTemplate() {
 
   return (
     <Main>
-       <header className="header">
+      <header className="header">
         {user ? (
           <Header stateConfig={{ state, setState: () => setState(!state) }} />
         ) : (
+          <ContentButton>
           <button
             onClick={() => (window.location.href = "/login")}
+            className="btnlogin"
           >
             Iniciar Sesión
           </button>
+          </ContentButton>
         )}
       </header>
 
@@ -168,4 +171,24 @@ const ButtonContainer = styled.div`
   @media (max-width: 64em) {
     width: 100%;
   }
+`;
+
+const ContentButton = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: end;
+
+  .btnLogin {
+    background-color: #2ecc71;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+    &:hover {
+      background-color: #1abc9c;
+    }
 `;
