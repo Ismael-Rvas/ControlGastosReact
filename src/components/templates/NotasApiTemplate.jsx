@@ -131,7 +131,7 @@ const NotesCard = styled.div`
   padding: 30px;
   margin-top: 50px;
   height: 100%;
-  max-height: 600px;
+  max-height: 300px;
 
   .note-item {
     margin-bottom: 20px;
