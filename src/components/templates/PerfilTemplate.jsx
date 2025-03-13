@@ -134,6 +134,19 @@ const ProfileCard = styled.div`
         border-radius: 50%;
         border: 4px solid white;
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        animation: flotar 1.7s ease-in-out infinite alternate;
+    }
+
+    @keyframes flotar {
+        0% {
+            transform: translate(0, 0px);
+        }
+        50% {
+            transform: translate(0, 10px);
+        }
+        100% {
+            transform: translate(0, -0px);
+        }
     }
 
     .profile-info h3 {

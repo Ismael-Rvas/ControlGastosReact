@@ -180,7 +180,7 @@ const ContentButton = styled.div`
   position: relative;
   justify-content: end;
 
-  .btnLogin {
+  .btnlogin {
     background-color: #2ecc71;
     color: #fff;
     padding: 10px 20px;
