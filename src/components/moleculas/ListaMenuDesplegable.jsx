@@ -25,5 +25,15 @@ const Container = styled.div`
   border-radius: 22px;
   top: ${(props) => props.top};
   box-shadow: ${() => v.boxshadowGray};
-  z-index:1;
+  z-index: 1;
+
+  @media (max-width: 768px) {
+    padding: 8px;
+    border-radius: 18px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 6px;
+    border-radius: 15px;
+  }
 `;

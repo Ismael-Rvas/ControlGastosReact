@@ -175,6 +175,28 @@ const Container = styled.div.withConfig({
     }
   }
 
+  @media (max-width: 768px) {
+    .tabs {
+      width: 100vw;
+      flex-direction: column;
+      align-items: center;
+      li {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+      .glider {
+      margin-top: 10px;
+      width: 80%;
+      transition: 0.25s ease-out;
+      transform: translateY(${(props) => props.activeTab});
+      }
+    }
+    .tab-content {
+      width: 100vw;
+      margin-top: 30px;
+    }
+  }
+
   .tab-content {
     position: relative;
     /* border: 1px solid red; */

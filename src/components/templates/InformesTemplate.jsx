@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { CalendarioLineal, Header, Tabs,ContentFiltros ,Btndesplegable,ListaMenuDesplegable,DataDesplegableMovimientos,useOperaciones,} from "../../index";
+import { Device } from "../../styles/breakpoints";
 import { useState } from "react";
 import dayjs from "dayjs";
 export function InformesTemplate() {
@@ -102,6 +103,46 @@ const Container = styled.div`
   }
   .main {
     grid-area: main;
+  }
+
+
+  @media ${Device.tablet} {
+    /* Tablets (768px en adelante) */
+    grid-template:
+      "header" 80px
+      "area1" auto
+      "area2" 60px
+      "main" auto;
+  }
+
+  @media ${Device.mobile} {
+    /* Móviles (576px en adelante) */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    .area1 {
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .area2 {
+      padding-bottom: 10px;
+    }
+  }
+
+  @media (max-width: 300px) {
+    /* Móviles ultra pequeños */
+    padding: 10px;
+    font-size: 12px;
+
+    .header, .area1, .area2, .main {
+      flex-direction: column;
+      text-align: center;
+      font-size: 12px;
+    }
   }
 `;
 const ContentFiltro = styled.div`
