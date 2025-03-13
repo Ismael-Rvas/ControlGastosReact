@@ -81,3 +81,6 @@ export * from './store/CuentaStore';
 export * from './components/organismos/formularios/RegistrarCuenta';
 export * from './pages/Perfil';
 export * from './components/templates/PerfilTemplate';
+export * from './components/templates/NotasApiTemplate';
+export * from './pages/NotasApi';
+export * from './hooks/ProtectedRouteAdmin';

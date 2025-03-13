@@ -5,5 +5,5 @@ export const ContentHeader = styled.div`
   align-items: center;
   position: relative;
   justify-content: end;
-  z-index: 10000;
+  z-index: 3;
 `;

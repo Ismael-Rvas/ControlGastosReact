@@ -1,6 +1,5 @@
 import { supabase, ObtenerIdAuthSupabase } from "../index";
 
-// Función para verificar si el usuario es ADMIN
 export const useAdminStore = async () => {
   const idAuthSupabase = await ObtenerIdAuthSupabase(); 
   if (idAuthSupabase) {

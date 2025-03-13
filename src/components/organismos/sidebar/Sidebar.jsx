@@ -86,6 +86,7 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
     padding-bottom: 60px;
+
     .imgcontent {
       display: flex;
       justify-content: center;
@@ -98,6 +99,7 @@ const Container = styled.div`
       img {
         width: 100%;
         animation: flotar 1.7s ease-in-out infinite alternate;
+
       }
     }
     h2 {

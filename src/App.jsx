@@ -21,7 +21,6 @@ export const ThemeContext = createContext(null);
 function App() {
   const { mostrarUsuarios, datausuarios } = useUsuariosStore();
   const { pathname } = useLocation();
-  const [isFirstLogin, setIsFirstLogin] = useState(false); 
   const [user, setUser] = useState(null);
   const theme = datausuarios?.tema === "0" ? "light" : "dark";
   const themeStyle = theme === "light" ? Light : Dark;
@@ -31,25 +30,6 @@ function App() {
     queryFn: () => mostrarUsuarios(),
   });
 
-  // const { isLoadingg, errorr } = useQuery({
-  //   queryKey: ["mostrar usuarios"],
-  //   queryFn: mostrarUsuarios(),
-  //   onSuccess: () => {
-  //     setIsDataLoaded(true);
-  //     if (isFirstLogin) {
-  //       window.location.reload();
-  //     }
-  //   },
-  //   onError: () => {
-  //     setIsDataLoaded(true);
-  //   },
-  // });
-
-  // useEffect(() => {
-  //   if (user && user.isNew) {
-  //     setIsFirstLogin(true);
-  //   }
-  // }, [user]);
 
   if (isLoading ) {
     return <SpinnerLoader />;

@@ -82,6 +82,11 @@ export const LinksArray = [
     label: "Informes",
     icon: <MdOutlineAnalytics />,
     to: "/informes",
+  },
+  {
+    label: "Notas API",
+    icon: <MdOutlineAnalytics />,
+    to: "/notasApi",
   }
   
 ];
