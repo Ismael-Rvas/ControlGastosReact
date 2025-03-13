@@ -71,7 +71,10 @@ export function NotasApiTemplate() {
         <h1>NotasApi</h1>
       </div>
       <main className="main">
+
         <NotesCard>
+      <h2 className="title">Actualmente en desarrollo</h2>
+
           {loading ? (
             <p>Cargando...</p>
           ) : error ? (
