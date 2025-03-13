@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { supabase, InsertarUsuarios } from "../index";
+import Swal from "sweetalert2";
 
 const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
@@ -26,6 +27,31 @@ export const AuthContextProvider = ({ children }) => {
       idauth_supabase: idAuthSupabase,
     };
     await InsertarUsuarios(p);
+  };
+  const InsertarUsuarios = async (data) => {
+    try {
+      const { data: existingUser, error } = await supabase
+        .from('usuarios')
+        .select('*')
+        .eq('idauth_supabase', data.idauth_supabase)
+        .single();
+      
+      if (existingUser) {
+        return;
+      }
+      
+      const { data: insertedUser, error: insertError } = await supabase
+        .from('usuarios')
+        .insert([data]);
+
+      if (insertError) {
+        console.error('Error al insertar usuario:', insertError);
+      } else {
+        console.log('Usuario insertado:', insertedUser);
+      }
+    } catch (error) {
+      console.error('Error inesperado al insertar usuario:', error);
+    }
   };
   return (
     <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>

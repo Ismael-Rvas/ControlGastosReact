@@ -122,4 +122,4 @@ La app estará disponible en **http://localhost:5173** (o el puerto que Vite asi
 ## 📜 Licencia
 Este proyecto está bajo la licencia **MIT**. Puedes usarlo, modificarlo y distribuirlo libremente.
 
-📧 **Contacto:**  [GitHub](https://github.com/Ismael-Rvas/ControlGastosReact)
+📧 **Contacto:**  [GitHub](https://github.com/Ismael-Rvas)

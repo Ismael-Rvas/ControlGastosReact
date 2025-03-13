@@ -10,12 +10,13 @@ import {
   fotoUser,
 } from "../../index";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 export function DataUser({ stateConfig }) {
   const { user } = UserAuth();
   const { signout } = useAuthStore();
   const [img, setUserImg] = useState(null);
   const [admin, setAdmin] = useState(false);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const esAdmin = async () => {
       const adminStatus = await useAdminStore(); 
@@ -39,11 +40,11 @@ export function DataUser({ stateConfig }) {
     }
     if (p.tipo === "configuracion") {
      
-      window.location.href = "/configurar";
+      navigate("/configurar");
     }
     if (p.tipo === "perfil") {
      
-      window.location.href = "/perfil";
+       navigate("/perfil");
     }
   };
   return (

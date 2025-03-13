@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import { Carousel, Btnsave, v, Header, UserAuth} from "../../index";
 import {  useState } from "react";
+import { useNavigate } from "react-router-dom";
 export function HomeTemplate() {
   const [state, setState] = useState(false);
   const { user } = UserAuth()
-
+  const navigate = useNavigate();
   return (
     <Main>
       <header className="header">
@@ -13,7 +14,7 @@ export function HomeTemplate() {
         ) : (
           <ContentButton>
           <button
-            onClick={() => (window.location.href = "/login")}
+            onClick={() => navigate("/login")}
             className="btnlogin"
           >
             Iniciar Sesión

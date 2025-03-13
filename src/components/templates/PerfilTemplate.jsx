@@ -21,7 +21,6 @@ export function PerfilTemplate() {
 
         fetchUserData();
     }, []);
-    console.log(usuarioData)
 
     if (loading ) {
         return <SpinnerLoader/>;
